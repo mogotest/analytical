@@ -46,6 +46,12 @@ describe "Analytical::Modules::Mixpanel" do
       @api.identify('id').should == "mixpanel.identify('id');"
     end
   end
+  describe '#person_add' do
+    it 'should return a js string' do
+      @api = Analytical::Modules::Mixpanel.new :parent=>@parent, :js_url_key=>'abcdef'
+      @api.set_person_details({ :email => 'test@example.com', :first_name => 'John' }).should == 'mixpanel.people.set({$email: "test@example.com", $first_name: "John"});'
+    end
+  end
   describe '#init_javascript' do
     it 'should return the init javascript' do
       @api = Analytical::Modules::Mixpanel.new :parent=>@parent, :js_url_key=>'abcdef'
