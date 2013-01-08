@@ -40,6 +40,12 @@ describe "Analytical::Modules::Mixpanel" do
       @api.event('An event happened', { :item => 43 }).should == "mixpanel.track(\"An event happened\", {\"item\":43});"
     end
   end
+  describe '#alias' do
+    it 'should return a js string' do
+      @api = Analytical::Modules::Mixpanel.new :parent=>@parent, :js_url_key=>'abcdef'
+      @api.identify('id').should == "mixpanel.identify('id');"
+    end
+  end
   describe '#init_javascript' do
     it 'should return the init javascript' do
       @api = Analytical::Modules::Mixpanel.new :parent=>@parent, :js_url_key=>'abcdef'
