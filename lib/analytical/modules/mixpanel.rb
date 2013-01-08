@@ -47,6 +47,10 @@ module Analytical
         %(mixpanel.identify('#{id}');#{name_str})
       end
 
+      def alias(id)
+        %(mixpanel.identify('#{id}');)
+      end
+
       def event(name, attributes = {})
         %(mixpanel.track("#{name}", #{attributes.to_json});)
       end
