@@ -55,6 +55,12 @@ module Analytical
         %(mixpanel.track("#{name}", #{attributes.to_json});)
       end
 
+      def set_person_details(attributes)
+        encoded = attributes.collect { |k, v| "$#{k}: \"#{v}\"" }.join(', ')
+
+        %(mixpanel.people.set({#{encoded}});)
+      end
+
     end
   end
 end
