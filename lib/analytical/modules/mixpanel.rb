@@ -48,7 +48,7 @@ module Analytical
       end
 
       def alias(id)
-        %(mixpanel.identify('#{id}');)
+        %(mixpanel.alias('#{id}');)
       end
 
       def event(name, attributes = {})

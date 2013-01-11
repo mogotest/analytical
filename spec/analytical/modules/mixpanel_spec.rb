@@ -43,7 +43,7 @@ describe "Analytical::Modules::Mixpanel" do
   describe '#alias' do
     it 'should return a js string' do
       @api = Analytical::Modules::Mixpanel.new :parent=>@parent, :js_url_key=>'abcdef'
-      @api.identify('id').should == "mixpanel.identify('id');"
+      @api.identify('id').should == "mixpanel.alias('id');"
     end
   end
   describe '#person_add' do
