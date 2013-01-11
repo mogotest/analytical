@@ -8,6 +8,17 @@ module Analytical
         @tracking_command_location = :body_append
       end
 
+      def queue(*args)
+        return if @options[:ignore_duplicates] && @command_store.include?(args)
+
+        # :alias should always occur before :identify, otherwise you'll lose all the user history.
+        if args.first==:identify && (@command_store.commands.empty? || @command_store.commands.first.first != :alias)
+          @command_store.unshift args
+        else
+          @command_store << args
+        end
+      end
+
       def init_javascript(location)
         init_location(location) do
           js = <<-HTML
